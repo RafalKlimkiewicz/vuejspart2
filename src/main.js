@@ -1,25 +1,28 @@
 require('../node_modules/bootstrap/dist/css/bootstrap.min.css')
 
-let counter = 1;
-let container = document.createElement("div");
+import Vue from 'vue';
 
-container.classList.add("text-center", "p-3");
-
-let msg = document.createElement("h1");
-
-msg.classList.add("bg-primary", "text-white", "p-3");
-msg.textContent = "Button has not beed clicked";
-
-let button = document.createElement("button");
-
-button.textContent = "Press me";
-button.classList.add("btn", "btn-secondary");
-
-button.onclick = () => msg.textContent = `Press count: ${counter++}`;
-
-container.appendChild(msg);
-container.appendChild(button);
-
-let app = document.getElementById("app");
-
-app.parentElement.replaceChild(container, app);
+new Vue({
+  el: "#app",
+  template: `<div class="text-center p-3">
+    <h1 class="bg-secondary text-white p-3">
+        {{ message }}
+    </h1>
+    <button class="btn btn-secondary" v-on:click="handleClick">
+      Press me
+    </button>
+      `,
+  data: {
+    counter: 0
+  },
+  methods: {
+    handleClick() {
+      this.counter++;
+    }
+  },
+  computed: {
+    message() {
+      return this.counter == 0 ? "The button has not been pressed" : `Count pressed: ${this.counter}`;
+    }
+  }
+});
