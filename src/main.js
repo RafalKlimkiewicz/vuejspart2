@@ -1,28 +1,17 @@
 require('../node_modules/bootstrap/dist/css/bootstrap.min.css')
 
 import Vue from 'vue';
+import MyComponent from "./App.vue"
 
 new Vue({
   el: "#app",
-  template: `<div class="text-center p-3">
-    <h1 class="bg-secondary text-white p-3">
-        {{ message }}
-    </h1>
-    <button class="btn btn-secondary" v-on:click="handleClick">
-      Press me
-    </button>
-      `,
-  data: {
-    counter: 0
-  },
-  methods: {
-    handleClick() {
-      this.counter++;
-    }
-  },
-  computed: {
-    message() {
-      return this.counter == 0 ? "The button has not been pressed" : `Count pressed: ${this.counter}`;
-    }
-  }
+  components: { "custom": MyComponent },
+  template: `
+    <div class="text-center">
+      <h1 class="bg-primary text-white p-3">
+        To jest główny plik main.js
+      </h1>
+      <custom />
+    </div>
+    `,
 });
